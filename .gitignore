@@ -1,0 +1,10 @@
+__pycache__/
+logs/
+models/
+
+.DS_Store
+
+*.log
+*.tmp
+*.pyc
+*.sbatch
