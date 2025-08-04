@@ -30,7 +30,7 @@ import tqdm
 import cv2
 import matplotlib.cm as cm
 from src.utilities import pickling, tools
-from src.constants import VIEWS, PERCENT_T_DICT
+from src.constants import VIEWS #, PERCENT_T_DICT
 from src.detection_loading import loading, transformations
 from src.modeling.def_detr.deformable_detr import build_deformable_detr
 from PIL import Image
