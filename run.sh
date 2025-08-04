@@ -1,7 +1,6 @@
 #!/bin/bash
 
-
-NUM_PROCESSES=10
+NUM_PROCESSES=1
 DEVICE_TYPE='gpu'
 GPU_NUMBER=0
 MODEL_INDEX='1'
@@ -15,7 +14,6 @@ SEG_PATH='sample_data/segmentation'
 EXAM_LIST_PATH='sample_output/data.pkl'
 OUTPUT_PATH='sample_output'
 export PYTHONPATH=$(pwd):$PYTHONPATH
-
 
 # echo 'Stage 1: Crop Mammograms'
 python3 src/cropping/crop_mammogram.py \
@@ -32,16 +30,16 @@ python3 src/optimal_centers/get_optimal_centers.py \
     --output-exam-list-path $EXAM_LIST_PATH \
     --num-processes $NUM_PROCESSES
 
-# echo 'Stage 3: Run Classifier'
-bsub -Is -q gpu32 -gpu "num=1:mode=shared:j_exclusive=yes" -R "rusage[mem=3]" -R "select[hname!=skygpu19]" \
--n 20 python3 src/scripts/run_model.py \
-    --model-path $MODEL_PATH \
-    --data-path $EXAM_LIST_PATH \
-    --image-path $CROPPED_IMAGE_PATH \
-    --segmentation-path $SEG_PATH \
-    --output-path $OUTPUT_PATH \
-    --device-type $DEVICE_TYPE \
-    --gpu-number $GPU_NUMBER \
-    --model-index $MODEL_INDEX \
-    #--visualization-flag
+## echo 'Stage 3: Run Classifier'
+#bsub -Is -q gpu32 -gpu "num=1:mode=shared:j_exclusive=yes" -R "rusage[mem=3]" -R "select[hname!=skygpu19]" \
+#-n 20 python3 src/scripts/run_model.py \
+#    --model-path $MODEL_PATH \
+#    --data-path $EXAM_LIST_PATH \
+#    --image-path $CROPPED_IMAGE_PATH \
+#    --segmentation-path $SEG_PATH \
+#    --output-path $OUTPUT_PATH \
+#    --device-type $DEVICE_TYPE \
+#    --gpu-number $GPU_NUMBER \
+#    --model-index $MODEL_INDEX \
+#    #--visualization-flag
 
