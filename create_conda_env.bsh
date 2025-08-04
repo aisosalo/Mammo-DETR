@@ -1,0 +1,4 @@
+#!/bin/bash
+
+conda update -n base -c defaults conda
+conda create -y -n py38_env_deformable_detr python=3.8
